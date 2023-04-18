@@ -10,7 +10,8 @@ import config from "./config.js";
 const app = express().use(cors()).use(bodyParser.json());
 
 const gptApi = new ChatGPTAPI({
-  apiKey: process.env.OPENAI_API_KEY
+  apiKey: process.env.OPENAI_API_KEY,
+  apiBaseUrl: process.env.OPENAI_API_REVERSE_PROXY_URL,
 });
 
 const Config = configure(config);
@@ -31,7 +32,7 @@ class Conversation {
           }
         : {}
     );
-    
+
     if (res.conversationId) {
       this.conversationID = res.conversationId;
     }
